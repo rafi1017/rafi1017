@@ -1,0 +1,2 @@
+iface INTERFACE inet dhcp
+dhclient -v -r
