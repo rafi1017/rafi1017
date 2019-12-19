@@ -1,1 +1,2 @@
-dig +short facebook.com
+#!/bin/bash
+dig +short $1
