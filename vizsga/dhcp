@@ -1,0 +1,52 @@
+nano /etc/dhcp/dhcpd.conf
+
+ddns-update-style none;
+default-lease-time 600;
+max-lease-time 7200;
+#ping true;
+option domain-name-servers 172.27.15.2, 10.72.81.2;
+option domain-name "example.com";
+authorative;
+log-facility local7;
+ 
+subnet 192.168.1.0 netmask 255.255.255.0 {
+range 192.168.1.50 192.168.1.115;
+option subnet-mask 255.255.255.0;
+option domain-name-servers 192.168.1.254, 10.128.254.254;
+option domain-name “example.com”;
+option routers 192.168.1.1;
+option netbios-name-servers 192.168.1.3;
+option netbios-node-type 8;
+get-lease-hostnames true;
+use-host-decl-names true;
+default-lease-time 600;
+max-lease-time 7200;
+}
+ 
+ Some common DHCP server parameters:
+
+default-lease-time = Integer which sets the default lease time in seconds.
+max-lease-time = Integer which sets the maximum lease time, in seconds
+ping = check boolean If true, the server pings an address before assigning a lease on that address to a client.
+option domain-name–servers = The IP address or addresses of DNS servers the clients may use.
+option domain-name = The name of the domain that will grant fr the clients to use.
+authorative = The server is authoritative, this DHCP server should send DHCPNAK messages to misconfigured clients
+log-facility local7 = Send logs to syslog facility local7
+subnet 192.168.1.0 netmask 255.255.255.0 { anything enclosed here } the subnet declaration for 192.168.1.10 network
+range 192.168.1.50 192.168.1.115 = defines the IP address range that the server will lease IPs.
+option routers = defines the IP address of your gateway or the network exit point.
+option netbios-name-servers = The IP addresses of NetBIOS Name Service (NBNS) servers or Windows Internet Name Service (WINS) servers which are used by SMB/CIFS protocols to share files on Windows.
+option netbios-node-type = A code for how NetBIOS clients should attempt name resolution. Values are 1 to use broadcasts, 2 to use a WINS server, 4 to try broadcasts first followed by a WINS server and 8 to try a WINS server first followed by a broadcast.
+
+systemctl restart isc-dhcp-server
+systemctl status isc-dhcp-server
+
+nano /etc/dhcp/dhcpd.conf
+subnet 192.168.1.0 netmask 255.255.255.0 {
+range declarations….
+ 
+host WIN-SERVER {
+  hardware ethernet 00:0c:19:bc:2e:e1;
+  fixed-address 192.168.1.7;}
+}
+ systemctl restart isc-dhcp-server
