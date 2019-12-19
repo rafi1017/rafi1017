@@ -2,3 +2,7 @@
 iptables -I INPUT -p tcp -s !IP! --dport 22 -j ACCEPT
 iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 22 -j DROP
 
+-A INPUT -p tcp -m tcp --dport 22 -j HOME
+-A HOME -s w.x.y.z -j LOG --log-prefix "HOME:: "
+-A HOME -s w.x.y.z -j ACCEPT
+
