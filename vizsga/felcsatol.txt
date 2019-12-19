@@ -1,0 +1,4 @@
+mkfs.ext4 /dev/sdd2 # Megformázzuk ext4-re
+mkdir -p /opt2 # Létrehozzuk a /opt2-őt, ha még nem létezik
+mount -t ext4 -o noatime /dev/sdd2 /opt2 # Felcsatoljuk kézzel
+df -h /opt2 ; mount | grep opt2 # És ellenőrizzük, persze
