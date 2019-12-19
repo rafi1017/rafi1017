@@ -1,3 +1,5 @@
+https://www.tecmint.com/install-dhcp-server-client-on-centos-ubuntu/
+
 nano /etc/dhcp/dhcpd.conf
 
 ddns-update-style none;
